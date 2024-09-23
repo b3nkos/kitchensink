@@ -29,7 +29,7 @@ public class MemberController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Member> getMemberById(@PathVariable Long id) {
-        return ResponseEntity.ok(memberUseCase.getMemberById(id).get());
+        return ResponseEntity.ok(memberUseCase.getMemberById(id).orElse(null));
     }
 
     @PostMapping
