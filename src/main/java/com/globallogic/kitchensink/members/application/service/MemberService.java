@@ -26,6 +26,6 @@ public class MemberService implements MemberUseCase {
 
     @Override
     public Member createMember(Member member) {
-        return null;
+        return memberDomainService.save(member);
     }
 }

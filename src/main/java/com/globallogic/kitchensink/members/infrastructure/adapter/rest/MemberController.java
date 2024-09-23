@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
-@RestController("/members")
+@RestController
+@RequestMapping("/members")
 public class MemberController {
 
     private final MemberUseCase memberUseCase;
@@ -34,7 +35,8 @@ public class MemberController {
     @PostMapping
     public ResponseEntity<Member> createMember(@RequestBody MemberCreationRequest request) {
         Member member = memberMapper.fromMemberCreationRequestToDomain(request);
-        URI created = URI.create("/members/" + member.getId());
-        return ResponseEntity.created(created).body(memberUseCase.createMember(member));
+        Member saved = memberUseCase.createMember(member);
+        URI created = URI.create("/members/" + saved.getId());
+        return ResponseEntity.created(created).body(saved);
     }
 }

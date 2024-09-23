@@ -1,0 +1,15 @@
+### Create a new member
+POST http://localhost:8080/members
+Content-Type: application/json
+
+{
+  "name": "{{$random.alphabetic(10)}}",
+  "email": "{{$random.email}}",
+  "phone": "{{$random.integer(100, 900)}}-{{$random.integer(100, 900)}}-{{$random.integer(100, 900)}}"
+}
+
+### Get all members
+GET http://localhost:8080/members
+
+### Get member by id
+GET http://localhost:8080/members/1
