@@ -4,7 +4,7 @@
 This project is a REST API built with Spring Boot using hexagonal architecture. The API provides endpoints for managing resources related to members. It supports creating, find by id and find all operations and returns responses in JSON format.
 
 ## Key Features
-- Endpoints for operations on resources members resources
+- Endpoints for operations on members resources
 - Spring Boot 3 and Java 21
 - H2 Database for in-memory persistence (or any database of your choice)
 - Maven for build management
