@@ -1,9 +1,11 @@
 package com.globallogic.kitchensink.members.infrastructure.adapter.rest;
 
-import com.globallogic.kitchensink.members.application.dto.MemberCreationRequest;
-import com.globallogic.kitchensink.members.application.port.MemberMapper;
-import com.globallogic.kitchensink.members.application.port.MemberUseCase;
+import com.globallogic.kitchensink.members.application.usecase.CreateNewMemberUseCase;
+import com.globallogic.kitchensink.members.application.usecase.GetAllMembersUseCase;
+import com.globallogic.kitchensink.members.application.usecase.GetMemberByIdUseCase;
+import com.globallogic.kitchensink.members.infrastructure.adapter.dto.MemberCreationRequest;
 import com.globallogic.kitchensink.members.domain.model.Member;
+import com.globallogic.kitchensink.members.infrastructure.adapter.mapper.CustomMemberMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,28 +16,33 @@ import java.util.List;
 @RequestMapping("/members")
 public class MemberController {
 
-    private final MemberUseCase memberUseCase;
-    private final MemberMapper memberMapper;
+    private final GetAllMembersUseCase getAllMembersUseCase;
+    private final GetMemberByIdUseCase getMemberByIdUseCase;
+    private final CreateNewMemberUseCase createNewMemberUseCase;
+    private final CustomMemberMapper mapper;
 
-    public MemberController(MemberUseCase memberUseCase, MemberMapper memberMapper) {
-        this.memberUseCase = memberUseCase;
-        this.memberMapper = memberMapper;
+    public MemberController(GetAllMembersUseCase getAllMembersUseCase, GetMemberByIdUseCase getMemberByIdUseCase, CreateNewMemberUseCase createNewMemberUseCase, CustomMemberMapper mapper) {
+        this.getAllMembersUseCase = getAllMembersUseCase;
+        this.getMemberByIdUseCase = getMemberByIdUseCase;
+        this.createNewMemberUseCase = createNewMemberUseCase;
+        this.mapper = mapper;
     }
+
 
     @GetMapping
     public ResponseEntity<List<Member>> getAllMembers() {
-        return ResponseEntity.ok(memberUseCase.getAllMembers());
+        return ResponseEntity.ok(getAllMembersUseCase.getAllMembers());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Member> getMemberById(@PathVariable Long id) {
-        return ResponseEntity.ok(memberUseCase.getMemberById(id).orElse(null));
+        return ResponseEntity.ok(getMemberByIdUseCase.getMemberById(id));
     }
 
     @PostMapping
     public ResponseEntity<Member> createMember(@RequestBody MemberCreationRequest request) {
-        Member member = memberMapper.fromMemberCreationRequestToDomain(request);
-        Member saved = memberUseCase.createMember(member);
+        Member member = mapper.fromMemberCreationRequestToDomain(request);
+        Member saved = createNewMemberUseCase.createNewMember(member);
         URI created = URI.create("/members/" + saved.getId());
         return ResponseEntity.created(created).body(saved);
     }
