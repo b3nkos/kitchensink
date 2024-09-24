@@ -1,7 +1,7 @@
 # Kitchensink API Documentation
 
 ## Project Overview
-This project is a REST API built with Spring Boot. The API provides endpoints for managing resources related to members. It supports creating, find by id and find all operations and returns responses in JSON format.
+This project is a REST API built with Spring Boot using hexagonal architecture. The API provides endpoints for managing resources related to members. It supports creating, find by id and find all operations and returns responses in JSON format.
 
 ## Key Features
 - Endpoints for operations on resources members resources
