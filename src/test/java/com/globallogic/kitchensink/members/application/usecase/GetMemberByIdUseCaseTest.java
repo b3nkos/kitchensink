@@ -31,9 +31,7 @@ class GetMemberByIdUseCaseTest {
         Long memberId = 1L;
         when(memberRepository.findById(memberId)).thenReturn(Optional.empty());
 
-        assertThatThrownBy(() -> {
-            getMemberByIdUseCase.getMemberById(memberId);
-        })
+        assertThatThrownBy(() -> getMemberByIdUseCase.getMemberById(memberId))
                 .isInstanceOf(MemberNotFoundException.class)
                 .hasMessageContaining("Member with id " + memberId + " not found");
     }
