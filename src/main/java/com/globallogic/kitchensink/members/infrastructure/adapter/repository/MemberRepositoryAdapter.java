@@ -33,6 +33,13 @@ public class MemberRepositoryAdapter implements MemberRepository {
     }
 
     @Override
+    public Optional<Member> findByEmail(String email) {
+        Optional<MemberEntity> optionalMemberEntity = memberJpaRepository.findByEmail(email);
+        return optionalMemberEntity.map(mapper::toDomain);
+
+    }
+
+    @Override
     public List<Member> findAll() {
         return memberJpaRepository
                 .findAll()

@@ -21,6 +21,10 @@ public class MemberDomainService {
         return memberRepository.findById(id);
     }
 
+    public Optional<Member> getMemberByEmail(String email) {
+        return memberRepository.findByEmail(email);
+    }
+
     public List<Member> getAllMembers() {
         return memberRepository.findAll();
     }

@@ -1,5 +1,7 @@
 package com.globallogic.kitchensink.members.infrastructure.config;
 
+import com.globallogic.kitchensink.members.application.exception.MemberAlreadyRegisteredException;
+import com.globallogic.kitchensink.members.application.exception.MemberNotFoundException;
 import com.globallogic.kitchensink.members.infrastructure.adapter.dto.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,5 +34,18 @@ public class MemberControllerAdvice {
                 HttpStatus.BAD_REQUEST.getReasonPhrase(),
                 message
         );
+    }
+
+    @ExceptionHandler(MemberAlreadyRegisteredException.class)
+    public ResponseEntity<ErrorResponse> handleMemberAlreadyRegisteredException(
+            MemberAlreadyRegisteredException exception) {
+        return ResponseEntity.badRequest()
+                .body(buildErrorResponse(exception.getMessage()));
+    }
+
+    @ExceptionHandler(MemberNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleMemberNotFoundException(MemberNotFoundException exception) {
+        return ResponseEntity.badRequest()
+                .body(buildErrorResponse(exception.getMessage()));
     }
 }
