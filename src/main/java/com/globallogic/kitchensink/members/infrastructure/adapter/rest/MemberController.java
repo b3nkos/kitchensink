@@ -7,6 +7,7 @@ import com.globallogic.kitchensink.members.infrastructure.adapter.dto.MemberCrea
 import com.globallogic.kitchensink.members.domain.model.Member;
 import com.globallogic.kitchensink.members.infrastructure.adapter.dto.MemberCreationResponse;
 import com.globallogic.kitchensink.members.infrastructure.adapter.mapper.CustomMemberMapper;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,7 +42,7 @@ public class MemberController {
     }
 
     @PostMapping
-    public ResponseEntity<MemberCreationResponse> createMember(@RequestBody MemberCreationRequest request) {
+    public ResponseEntity<MemberCreationResponse> createMember(@Valid @RequestBody MemberCreationRequest request) {
         Member member = mapper.fromMemberCreationRequestToDomain(request);
         Member saved = createNewMemberUseCase.createNewMember(member);
         MemberCreationResponse memberCreationResponse = mapper.fromDomainToMemberCreationResponse(saved);

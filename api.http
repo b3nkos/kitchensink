@@ -3,9 +3,9 @@ POST http://localhost:8080/members
 Content-Type: application/json
 
 {
-  "name": "{{$random.alphabetic(10)}}",
+  "name": "{{$random.alphabetic(12)}}",
   "email": "{{$random.email}}",
-  "phone": "{{$random.integer(100, 900)}}-{{$random.integer(100, 900)}}-{{$random.integer(100, 900)}}"
+  "phone": "73689763765"
 }
 
 ### Get all members
