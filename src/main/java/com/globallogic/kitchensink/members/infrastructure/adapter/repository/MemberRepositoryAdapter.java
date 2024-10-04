@@ -42,7 +42,7 @@ public class MemberRepositoryAdapter implements MemberRepository {
     @Override
     public List<Member> findAll() {
         return memberJpaRepository
-                .findAll()
+                .findAllByOrderByNameAsc()
                 .stream()
                 .map(mapper::toDomain)
                 .toList();
