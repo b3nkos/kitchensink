@@ -8,7 +8,8 @@ This project is a REST API built with Spring Boot using hexagonal architecture. 
 
 - Endpoints for operations on members resources
 - Spring Boot 3 and Java 21
-- H2 Database for in-memory persistence (or any database of your choice)
+- H2 Database for in-memory persistence (or any SQL database of your choice)
+- MongoDB
 - Maven for build management
 
 ## Prerequisites
@@ -18,6 +19,7 @@ Before you can run this project, ensure that you have the following installed:
 - Java 21
 - Maven 3.9
 - Git (for cloning the repository, optional)
+- Docker 27
 - Postman, cURL or a client for testing API endpoints
 
 ## Running the Project
@@ -37,7 +39,20 @@ You can build the project using Maven. Navigate to the project directory and run
 mvn clean install
 ```
 
-### Step 3: Run the Application
+### Step 3: Create a Mongo Docker container
+
+Before run the application, start a docker mongo container to save the information using the following docker command.
+
+```bash
+docker run -d --name kitchensink-mongo \
+  -p 27017:27017 \
+  -e MONGO_INITDB_ROOT_USERNAME=mongoadmin \
+  -e MONGO_INITDB_ROOT_PASSWORD=secret \
+  -e MONGO_INITDB_DATABASE=members \
+  mongo
+```
+
+### Step 4: Run the Application
 
 After building the project, you can run the Spring Boot application using the following Maven command:
 
@@ -51,7 +66,7 @@ Alternatively, you can run the JAR file directly after the build:
 java -jar target/kitchensink-0.0.1-SNAPSHOT.jar
 ```
 
-### Step 4: Accessing the API
+### Step 5: Accessing the API
 
 The API will be accessible at `http://localhost:8080`. You can test the endpoints using tools like Postman or cURL.
 
@@ -70,6 +85,7 @@ curl -X GET --location "http://localhost:8080/members"
 | POST        | `/members`      | Create a new member         |
 
 ### Example Request: Create a Member
+
 ```bash
 curl -X POST --location "http://localhost:8080/members" \
     -H "Content-Type: application/json" \
@@ -92,6 +108,7 @@ curl -X POST --location "http://localhost:8080/members" \
 ```
 
 ## Running Tests
+
 To run the unit and integration tests, use the following Maven command:
 ```bash
 mvn test
