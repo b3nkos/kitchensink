@@ -1,4 +1,4 @@
-package com.globallogic.kitchensink.members.infrastructure.adapter.repository;
+package com.globallogic.kitchensink.members.infrastructure.adapter.repository.jpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

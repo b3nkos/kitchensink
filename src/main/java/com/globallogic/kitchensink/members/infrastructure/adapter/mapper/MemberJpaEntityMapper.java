@@ -1,7 +1,7 @@
 package com.globallogic.kitchensink.members.infrastructure.adapter.mapper;
 
 import com.globallogic.kitchensink.members.domain.model.Member;
-import com.globallogic.kitchensink.members.infrastructure.adapter.repository.MemberEntity;
+import com.globallogic.kitchensink.members.infrastructure.adapter.repository.jpa.MemberEntity;
 import org.springframework.stereotype.Component;
 
 @Component

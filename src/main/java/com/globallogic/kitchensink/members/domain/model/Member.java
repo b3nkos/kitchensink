@@ -1,8 +1,8 @@
 package com.globallogic.kitchensink.members.domain.model;
 
 public class Member {
-    private Long id;
     private final String name;
+    private Long id;
     private final String email;
     private final String phone;
 

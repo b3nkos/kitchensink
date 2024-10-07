@@ -1,4 +1,4 @@
-package com.globallogic.kitchensink.members.infrastructure.adapter.repository;
+package com.globallogic.kitchensink.members.infrastructure.adapter.repository.jpa;
 
 import com.globallogic.kitchensink.members.domain.model.Member;
 import com.globallogic.kitchensink.members.domain.repository.MemberRepository;
@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class MemberRepositoryAdapter implements MemberRepository {
+public class MemberJpaRepositoryAdapter implements MemberRepository {
     private final MemberJpaRepository memberJpaRepository;
     private final MemberJpaEntityMapper mapper;
 
-    public MemberRepositoryAdapter(MemberJpaRepository memberJpaRepository, MemberJpaEntityMapper mapper) {
+    public MemberJpaRepositoryAdapter(MemberJpaRepository memberJpaRepository, MemberJpaEntityMapper mapper) {
         this.memberJpaRepository = memberJpaRepository;
         this.mapper = mapper;
     }
